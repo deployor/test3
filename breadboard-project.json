@@ -1,0 +1,46 @@
+{
+  "format": "velxio-project",
+  "version": 1,
+  "boards": [
+    {
+      "id": "esp32",
+      "boardKind": "esp32",
+      "x": 289.7153490341432,
+      "y": 24.603492707962147,
+      "activeFileGroupId": "group-esp32",
+      "languageMode": "arduino",
+      "serialBaudRate": 0
+    }
+  ],
+  "fileGroups": {
+    "group-esp32": [
+      {
+        "name": "sketch.ino",
+        "content": "#include <WiFi.h>\n#include <WebServer.h>\n#include <HTTPClient.h>\n#include <WiFiClientSecure.h>\n\n// For a real ESP32, put your WiFi name and password here.\n// In Breadboard, these are automatically replaced with the simulator WiFi.\nconst char* ssid = \"[REDACTED]\";\nconst char* password = \"your wifi password\";\n\nWebServer server(80);\n\nString getJoke() {\n  WiFiClientSecure client;\n  client.setInsecure();\n\n  HTTPClient http;\n  http.begin(client, \"https://icanhazdadjoke.com/\");\n  http.addHeader(\"Accept\", \"text/plain\");\n\n  String joke = \"Could not get a joke right now.\";\n\n  if (http.GET() == 200) {\n    joke = http.getString();\n  }\n\n  http.end();\n  return joke;\n}\n\nvoid showJoke() {\n  String joke = getJoke();\n\n  String page =\n    \"<!doctype html>\"\n    \"<html><body style='font-family:Arial;text-align:center;padding:50px'>\"\n    \"<h1>ESP32 joke machine</h1>\"\n    \"<p style='font-size:20px'>\" + joke + \"</p>\"\n    \"<p><a href='./'>Get another joke</a></p>\"\n    \"</body></html>\";\n\n  server.send(200, \"text/html\", page);\n}\n\nvoid setup() {\n  Serial.begin(115200);\n\n  WiFi.begin(ssid, password);\n\n  Serial.print(\"Connecting to WiFi\");\n  while (WiFi.status() != WL_CONNECTED) {\n    delay(500);\n    Serial.print(\".\");\n  }\n\n  server.on(\"/\", showJoke);\n  server.begin();\n\n  Serial.println(\"\\nOpen this link:\");\n  Serial.print(\"http://\");\n  Serial.println(WiFi.localIP());\n}\n\nvoid loop() {\n  server.handleClient();\n}"
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "servo_1783649891081_ea53n45th",
+      "metadataId": "servo",
+      "x": 184.39650729203782,
+      "y": -287.8231155891364,
+      "properties": {
+        "angle": 0,
+        "horn": "single",
+        "hornColor": "#ccc"
+      }
+    },
+    {
+      "id": "ir_transmitter_1783649992724_p8tqq3m9t",
+      "metadataId": "ir-transmitter",
+      "x": -38.9431465374425,
+      "y": -218.7155331099865,
+      "properties": {}
+    }
+  ],
+  "wires": [],
+  "activeBoardId": "esp32",
+  "ignoreStock": true
+}
