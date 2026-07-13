@@ -5,7 +5,7 @@
 
 
 
-> Built in [Breadboard](https://breadboard.hackclub.com), a Hack Club program. This project took ~1.4 hours of work.
+> Built in [Breadboard](https://breadboard.hackclub.com), a Hack Club program. This project took ~1.7 hours of work.
 
 
 
@@ -26,7 +26,8 @@ ee eee eee
 
 ## Demo
 
-- **Try it:** [https://breadboard.hackclub.com/share/81](https://breadboard.hackclub.com/share/81)
+- **Simulate it live:** [https://breadboard.hackclub.com/share/81](https://breadboard.hackclub.com/share/81), runs the firmware in the Breadboard simulator
+- **View the design:** [https://taniwankenobi.github.io/breadboard-plays/p/81/](https://taniwankenobi.github.io/breadboard-plays/p/81/)
 
 
 ## Schematic
@@ -39,7 +40,9 @@ The editor snapshot is in `breadboard-project.json`.
 | Part | Quantity |
 | --- | --- |
 | ir-transmitter | 1 |
-| servo | 1 |
+| lcd1602 | 1 |
+| servo | 3 |
+| ssd1306-i2c | 1 |
 
 
 ## Firmware
@@ -56,7 +59,7 @@ Build journal entries are kept in [`journals.md`](journals.md).
 
 
 
-*Made in [Breadboard](https://breadboard.hackclub.com) — 1.4h of work*
+*Made in [Breadboard](https://breadboard.hackclub.com) — 1.7h of work*
 
 
 
